@@ -20,7 +20,7 @@ public class UploadService {
 
 	 public String saveImage(MultipartFile file, String name) throws IOException {
 	        
-		 	Path uploadPath = Paths.get(uploadDir);
+		 	Path uploadPath = Paths.get(System.getProperty("user.dir")+uploadDir);
 	        
 	        if (!Files.exists(uploadPath)) {
 	            Files.createDirectories(uploadPath);
@@ -32,6 +32,6 @@ public class UploadService {
 	        try (InputStream inputStream = file.getInputStream()) {
 	            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 	        }
-	        return filename;
+	        return filename + "at directory: " + uploadPath.toString();
 	    }
 }
