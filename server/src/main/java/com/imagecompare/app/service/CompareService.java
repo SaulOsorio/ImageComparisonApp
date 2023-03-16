@@ -19,8 +19,8 @@ public class CompareService {
 	 private String compareImagePath;
 	 
 	public String compareImage() {
-        Mat baseImage = Imgcodecs.imread(baseImagePath);
-        Mat compareImage = Imgcodecs.imread(compareImagePath);
+        Mat baseImage = Imgcodecs.imread(System.getProperty("user.dir")+baseImagePath);
+        Mat compareImage = Imgcodecs.imread(System.getProperty("user.dir")+compareImagePath);
         Mat difference = new Mat();
         
         Imgproc.cvtColor(baseImage, baseImage, Imgproc.COLOR_BGR2GRAY);
@@ -28,10 +28,18 @@ public class CompareService {
 
         Core.compare(baseImage, compareImage, difference, Core.CMP_NE);
 
-        if (Core.countNonZero(difference) == 0) {
-            return "The images are the same.";
+        if (baseImage.size().equals(compareImage.size())) {
+            Mat diff = new Mat();
+            Core.absdiff(baseImage, compareImage, diff);
+            double mse = Core.mean(diff.mul(diff)).val[0];
+
+            if (mse == 0) {
+                return "The images are the same.";
+            } else {
+                return "The images are different.";
+            }
         } else {
-            return "The images are not the same.";
+        		return "The images have different sizes.";
         }
 }
 }
