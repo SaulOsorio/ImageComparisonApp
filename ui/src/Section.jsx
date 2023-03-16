@@ -25,26 +25,16 @@ export const Bttn = ({}) => {
 
   const handleImage1Change = (event) => {
     setFile1(event.target.files[0]);
+    setImages((images) => [...images, URL.createObjectURL(event.target.files[0])]);
+  return URL.revokeObjectURL(event.target.files[0]);
   };
 
   const handleImage2Change = (event) => {
     setFile2(event.target.files[0]);
+        setImagesToCompare((imagesToCompare) => [...imagesToCompare, URL.createObjectURL(event.target.files[0]),]);
+    return URL.revokeObjectURL(event.target.files[0]);
   };
 
-//   const handleChange = (e) => {
-//     setImages((images) => [
-//         ...images,
-//          URL.createObjectURL(e.files[0])]);
-//     return URL.revokeObjectURL(e.files[0]);
-//   };
-
-//   const handleChangeToCompare = (e) => {
-//     setImagesToCompare((imagesToCompare) => [
-//       ...imagesToCompare,
-//       URL.createObjectURL(e.files[0]),
-//     ]);
-//     return URL.revokeObjectURL(e.files[0]);
-//   };
 
   const deleteImage = (blob) => {
     setImages(images.filter((x) => x !== blob));
@@ -91,7 +81,7 @@ export const Bttn = ({}) => {
         </div>
       </div>
       <div className="center">
-        <button type="submit">Submit</button>
+        <button type="submit">Upload Images</button>
       </div>
     </form>
   );
