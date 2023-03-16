@@ -1,0 +1,32 @@
+html, body {
+    background-color: blanchedalmond;
+    color: black;
+    font-family: Helvetica, Arial, sans-serif;
+    font: 1.3rem;
+    padding: 70px;
+    
+}
+
+button{
+    padding: 15px;
+    font-size: 1.3rem;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-sidebar{
+    width: 50%;
+    float: left;  
+}
+.right-sidebar{
+    float: right; 
+}
+
+img{
+    max-width:450px;
+    max-height:450px;
+}
