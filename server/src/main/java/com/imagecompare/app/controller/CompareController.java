@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.imagecompare.app.service.CompareService;
 
 @RestController
-@RequestMapping("compare")
 public class CompareController {
 	
 	@Autowired
 	CompareService compareService;
 	
 	
-	@GetMapping("/")
+	@GetMapping("/compare")
 	public ResponseEntity<String> getComparisonResult(){
 		try {
 			return new ResponseEntity<String>(this.compareService.compareImage(),HttpStatus.OK);
