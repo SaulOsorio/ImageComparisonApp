@@ -3,7 +3,9 @@ package com.imagecompare.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +17,7 @@ public class CompareController {
 	@Autowired
 	CompareService compareService;
 	
-	
+	@CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET})
 	@GetMapping("/compare")
 	public ResponseEntity<String> getComparisonResult(@RequestParam("baseImageName") String baseImageName,
             @RequestParam("compareImageName") String compareImageName){
