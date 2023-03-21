@@ -12,6 +12,8 @@ import com.imagecompare.app.service.UploadService;
 
 @RestController
 public class UploadController {
+	
+	
 	@Autowired
     private UploadService uploadService;
 	
