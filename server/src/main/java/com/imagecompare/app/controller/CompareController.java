@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.imagecompare.app.service.CompareService;
@@ -16,9 +17,12 @@ public class CompareController {
 	
 	
 	@GetMapping("/compare")
-	public ResponseEntity<String> getComparisonResult(){
+	public ResponseEntity<String> getComparisonResult(@RequestParam("baseImageName") String baseImageName,
+            @RequestParam("compareImageName") String compareImageName){
 		try {
-			return new ResponseEntity<String>(this.compareService.compareImage(),HttpStatus.OK);
+			System.out.println(baseImageName);
+			 System.out.println(compareImageName);
+			return new ResponseEntity<String>(this.compareService.compareImage(baseImageName,compareImageName),HttpStatus.OK);
 		}catch(Exception e){
 			return new ResponseEntity<String>("Could not compare: " + e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
