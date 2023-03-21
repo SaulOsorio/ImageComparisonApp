@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
+import { CompareBttn } from "./Compare";
 import "./style.css";
 
 export const Bttn = ({}) => {
+  //variables send to CompareBtn
+  const [baseImageName, setBaseImageName] = useState("")
+  const [imageCompareName, setimageCompareName] = useState("")
+  //Variables to display on screen
   const [images, setImages] = useState([]);
   const [imagesToCompare, setImagesToCompare] = useState([]);
-
+  //variables send to API
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
 
@@ -24,17 +29,18 @@ export const Bttn = ({}) => {
   };
 
   const handleImage1Change = (event) => {
+    setBaseImageName(String(event.target.files[0].name));
     setFile1(event.target.files[0]);
     setImages((images) => [...images, URL.createObjectURL(event.target.files[0])]);
-  return URL.revokeObjectURL(event.target.files[0]);
-  };
-
-  const handleImage2Change = (event) => {
-    setFile2(event.target.files[0]);
-        setImagesToCompare((imagesToCompare) => [...imagesToCompare, URL.createObjectURL(event.target.files[0]),]);
     return URL.revokeObjectURL(event.target.files[0]);
   };
 
+  const handleImage2Change = (event) => {
+    setimageCompareName(String(event.target.files[0].name));
+    setFile2(event.target.files[0]);
+    setImagesToCompare((imagesToCompare) => [...imagesToCompare, URL.createObjectURL(event.target.files[0]),]);
+    return URL.revokeObjectURL(event.target.files[0]);
+  };
 
   const deleteImage = (blob) => {
     setImages(images.filter((x) => x !== blob));
@@ -45,6 +51,7 @@ export const Bttn = ({}) => {
   }, [images]);
 
   return (
+    <>
     <form onSubmit={handleSubmit} >
       <div className="center">
         <div className="left-sidebar">
@@ -84,5 +91,8 @@ export const Bttn = ({}) => {
         <button type="submit">Upload Images</button>
       </div>
     </form>
+    <CompareBttn baseImageName={baseImageName} imageCompareName={imageCompareName}/>
+    </>
+
   );
 };
