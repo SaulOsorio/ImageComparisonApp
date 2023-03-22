@@ -11,7 +11,7 @@ export const CompareBttn = () =>{
           const response = await fetch('http://localhost:8080/compare');
           const data = await response.json();
           setData(data.result)
-          console.log(data); // the response data
+          //console.log(data); // the response data
         } catch (error) {
           console.error(error); // handle errors
         }
