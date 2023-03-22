@@ -12,26 +12,38 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompareService {
 	
-	 @Value("${baseImagePath}")
-	 private String baseImagePath;
+	/*
+	 * @Value("${baseImagePath}") private String baseImagePath;
+	 * 
+	 * @Value("${compareImagePath}") private String compareImagePath;
+	 */
+	 @Value("${upload.dir}")
+	 private String uploadDir;
 	 
-	 @Value("${compareImagePath}")
-	 private String compareImagePath;
-	 
-	public String compareImage() {
-        Mat baseImage = Imgcodecs.imread(baseImagePath);
-        Mat compareImage = Imgcodecs.imread(compareImagePath);
-        Mat difference = new Mat();
+	 public String compareImage(String baseImageName, String compareImageName) {
+		
+		System.out.println(System.getProperty("user.dir")+uploadDir+baseImageName);
+		Mat img1 = Imgcodecs.imread(System.getProperty("user.dir")+uploadDir+baseImageName);
+        Mat img2 = Imgcodecs.imread(System.getProperty("user.dir")+uploadDir+compareImageName);
+
+        // Resize the images to the same size (optional)
+        Imgproc.resize(img1, img1, img2.size());
         
-        Imgproc.cvtColor(baseImage, baseImage, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.cvtColor(compareImage, compareImage, Imgproc.COLOR_BGR2GRAY);
+        // Compare the two images
+        Mat diff = new Mat();
+        Core.absdiff(img1, img2, diff);
 
-        Core.compare(baseImage, compareImage, difference, Core.CMP_NE);
+        // Convert the difference image to grayscale
+        Imgproc.cvtColor(diff, diff, Imgproc.COLOR_BGR2GRAY);
 
-        if (Core.countNonZero(difference) == 0) {
-            return "The images are the same.";
+        // Count the number of non-zero pixels (pixels that are different)
+        int nonZeroPixels = Core.countNonZero(diff);
+
+ 
+        if (nonZeroPixels == 0) {
+            return "Both images are the same!";
         } else {
-            return "The images are not the same.";
+            return "Images are different";
         }
 }
 }
