@@ -32,6 +32,6 @@ public class UploadService {
 	        try (InputStream inputStream = file.getInputStream()) {
 	            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 	        }
-	        return filename + "at directory: " + uploadPath.toString();
+	        return filename;
 	    }
 }

@@ -41,9 +41,9 @@ public class CompareService {
 
  
         if (nonZeroPixels == 0) {
-            return "Both images are the same!";
+            return "{\"result\": \"Both images are the same!\"}";
         } else {
-            return "Images are different";
+            return "{\"result\": \"Images are different\"}";
         }
 }
 }
