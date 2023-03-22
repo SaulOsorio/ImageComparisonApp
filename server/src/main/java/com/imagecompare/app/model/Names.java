@@ -1,20 +1,20 @@
 package com.imagecompare.app.model;
 
 public class Names {
-	private String baseImageName;
-	private String compareImageName;
+	private static String baseImageName;
+	private static String compareImageName;
 	
-	public String getBaseImageName() {
+	public static String getBaseImageName() {
 		return baseImageName;
 	}
-	public void setBaseImageName(String baseImageName) {
-		this.baseImageName = baseImageName;
+	public static void setBaseImageName(String newBaseImageName) {
+		baseImageName = newBaseImageName;
 	}
-	public String getCompareImageName() {
+	public static String getCompareImageName() {
 		return compareImageName;
 	}
-	public void setCompareImageName(String compareImageName) {
-		this.compareImageName = compareImageName;
+	public static void setCompareImageName(String newCompareImageName) {
+		compareImageName = newCompareImageName;
 	}
 	
 	
