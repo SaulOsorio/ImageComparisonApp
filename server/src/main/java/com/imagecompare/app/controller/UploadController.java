@@ -3,6 +3,7 @@ package com.imagecompare.app.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,9 @@ public class UploadController {
 	
 	@Autowired
     private UploadService uploadService;
+	
 	@PostMapping("/upload")
+	@CrossOrigin(origins = "http://localhost:5173")
     public String uploadImages(@RequestParam("file1") MultipartFile baseImage,
                                @RequestParam("file2") MultipartFile compareImage) {
         try {
@@ -25,10 +28,10 @@ public class UploadController {
             Names.setBaseImageName(baseImageUpload);
             String compareImageUpload = uploadService.saveImage(compareImage, "compareImage");
             Names.setCompareImageName(compareImageUpload);
-            return "Files uploaded successfully with names: "+ baseImageUpload + " and "+ compareImageUpload;
+            return "{\"status\": \"Files uploaded successfully\"}";
         } catch (IOException e) {
             e.printStackTrace();
-            return "Error uploading files";
+            return "{\"status\":\"Error uploading files\"}";
         }
     }
 }
