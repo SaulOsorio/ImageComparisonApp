@@ -10,7 +10,6 @@ ReactDOM.createRoot( document.getElementById('root')).render(
     <React.StrictMode>
         <TitleSection title="Image Comparison" subtitle="WebApp"/>
         <Bttn/>
-        <CompareBttn/>
     </React.StrictMode>
 );
 

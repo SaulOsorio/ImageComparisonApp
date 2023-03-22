@@ -10,9 +10,9 @@ export const CompareBttn = (files) =>{
         console.log("compareImage."+ files.imageCompareName.split('.')[1]);
         fetch('http://localhost:8080/compare',{ 
         method: 'POST',
-        body: {baseImageName: "baseImage." + files.baseImageName.split('.')[1],
+        body: JSON.stringify({baseImageName: "baseImage." + files.baseImageName.split('.')[1],
                 compareImageName: "compareImage."+ files.imageCompareName.split('.')[1]},
-        })
+        )})
         //   .then(response => response.json())
         //   .then(data => setData(response.json()))
         //   .catch(error => console.error(error));
