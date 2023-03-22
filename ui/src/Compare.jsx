@@ -5,22 +5,18 @@ import './style.css'
 export const CompareBttn = () =>{
     const [data, setData] = useState(null);
 
-    // useEffect(() => {
-    //     fetch('http://localhost:8080/compare', {
-    //         mode: 'no-cors'
-    //     })
-    //       .then(response => response.json())
-    //       .then(data => setData(response.json()))
-    //       .catch(error => console.error(error));
-    //   }, []);
-
-    const handleCompare = () => {
-        fetch('http://localhost:8080/compare')
-          .then(response => response.json())
-          .then(data => setData(response.json()))
-          .catch(error => console.error(error));
-    }
     
+    async function handleCompare() {
+        try {
+          const response = await fetch('http://localhost:8080/compare');
+          const data = await response.json();
+          setData(data.result)
+          console.log(data); // the response data
+        } catch (error) {
+          console.error(error); // handle errors
+        }
+      }
+      
 
     return(
         <>
