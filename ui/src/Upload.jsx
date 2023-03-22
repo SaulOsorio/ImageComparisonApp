@@ -9,19 +9,34 @@ export const UploadImages = () => {
   const [file2, setFile2] = useState(null);
 
   const handleImage1Change = (event) => {
-    setFile1(event.target.files[0]);
-    setImages((images) => [
-      ...images,
-      URL.createObjectURL(event.target.files[0]),
-    ]);
+    const maxAllowedSize = 10 * 1024 * 1024;
+    if (event.target.files[0].size < maxAllowedSize){
+        setFile1(event.target.files[0]);
+        setImages((images) => [
+          ...images,
+          URL.createObjectURL(event.target.files[0]),
+        ]);
+    }
+    else{
+        alert("the size is bigger than 10 Mb");
+    }
+    
   };
 
   const handleImage2Change = (event) => {
-    setFile2(event.target.files[0]);
-    setImagesToCompare((imagesToCompare) => [
-      ...imagesToCompare,
-      URL.createObjectURL(event.target.files[0]),
-    ]);
+    const maxAllowedSize = 10 * 1024 * 1024;
+
+    if (event.target.files[0].size < maxAllowedSize){
+        
+        setFile2(event.target.files[0]);
+        setImagesToCompare((imagesToCompare) => [
+          ...imagesToCompare,
+          URL.createObjectURL(event.target.files[0]),
+        ]);
+    }
+    else{
+        alert("the size is bigger than 10 Mb");
+    }
   };
 
   const deleteImage = (blob) => {
@@ -84,8 +99,3 @@ export const UploadImages = () => {
     </form>
   );
 };
-
-
-
-
-
