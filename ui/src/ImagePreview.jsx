@@ -1,10 +1,10 @@
 import React from "react";
 
-export const ImagePreview = ({ image, onDelete }) => {
+export const ImagePreview = ({ image }) => {
   return (
     <div>
       <img src={image} alt={image} />
-      <button onClick={onDelete}>Delete</button>
+      
     </div>
   );
 };
