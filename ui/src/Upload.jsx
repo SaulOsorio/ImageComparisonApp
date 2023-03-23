@@ -14,7 +14,7 @@ export const UploadImages = () => {
     if (event.target.files[0].size < maxAllowedSize) {
       setFile1(event.target.files[0]);
       setImages((images) => [
-        ...images,
+        images[0],//...images,
         URL.createObjectURL(event.target.files[0]),
       ]);
     } else {
@@ -28,11 +28,11 @@ export const UploadImages = () => {
     if (event.target.files[0].size < maxAllowedSize) {
       setFile2(event.target.files[0]);
       setImagesToCompare((imagesToCompare) => [
-        ...imagesToCompare,
+        imagesToCompare[0],//...imagesToCompare,
         URL.createObjectURL(event.target.files[0]),
       ]);
     } else {
-      alert("the size is bigger than 10 Mb");
+      alert("The file size can not be bigger than 10MB");
     }
   };
 
@@ -72,10 +72,10 @@ export const UploadImages = () => {
             onChange={handleImage1Change}
           />
           {images.map((row, index) => (
+            
             <ImagePreview
               key={index}
               image={row}
-              onDelete={() => deleteImage(row)}
             />
           ))}
         </div>
@@ -90,7 +90,6 @@ export const UploadImages = () => {
             <ImagePreview
               key={index}
               image={row}
-              onDelete={() => deleteImage(row)}
             />
           ))}
         </div>
