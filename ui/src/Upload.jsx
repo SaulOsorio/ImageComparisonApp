@@ -14,7 +14,7 @@ export const UploadImages = () => {
     if (event.target.files[0].size < maxAllowedSize) {
       setFile1(event.target.files[0]);
       setImages((images) => [
-        ...images,
+        images[0],//...images,
         URL.createObjectURL(event.target.files[0]),
       ]);
     } else {
@@ -28,11 +28,11 @@ export const UploadImages = () => {
     if (event.target.files[0].size < maxAllowedSize) {
       setFile2(event.target.files[0]);
       setImagesToCompare((imagesToCompare) => [
-        ...imagesToCompare,
+        imagesToCompare[0],//...imagesToCompare,
         URL.createObjectURL(event.target.files[0]),
       ]);
     } else {
-      alert("the size is bigger than 10 Mb");
+      alert("The file size can not be bigger than 10MB");
     }
   };
 
@@ -40,27 +40,6 @@ export const UploadImages = () => {
     setImages(images.filter((x) => x !== blob));
     setImagesToCompare(imagesToCompare.filter((x) => x !== blob));
   };
-
-  // const handleSubmit = (event) => {
-  //   console.log("Simon!!");
-  //   event.preventDefault();
-
-  //   const formData = new FormData();
-  //   formData.append("file1", file1);
-  //   formData.append("file2", file2);
-
-  //   fetch("http://localhost:8080/upload", {
-  //     //mode: "no-cors",
-  //     method: "POST",
-  //     body: formData,
-  //   })
-
-  //   .then(response => response.json())
-  //   .then(setData(response.json()))
-  //   .catch(error => console.error(error));
-  
-  // };
-
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -76,7 +55,6 @@ export const UploadImages = () => {
     });
       const data = await response.json();
       setData(data.status)
-      //console.log(data.status); // the response data
     } catch (error) {
       //console.error(error); // handle errors
     }
@@ -94,10 +72,10 @@ export const UploadImages = () => {
             onChange={handleImage1Change}
           />
           {images.map((row, index) => (
+            
             <ImagePreview
               key={index}
               image={row}
-              onDelete={() => deleteImage(row)}
             />
           ))}
         </div>
@@ -112,7 +90,6 @@ export const UploadImages = () => {
             <ImagePreview
               key={index}
               image={row}
-              onDelete={() => deleteImage(row)}
             />
           ))}
         </div>
