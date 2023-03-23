@@ -1,6 +1,5 @@
 package com.imagecompare.app.service;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,16 +11,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.imagecompare.app.validator.FileValidator;
+
 @Service
 public class UploadService {
 	 @Value("${upload.dir}")
 	 private String uploadDir;
 	 
 
-	 public String saveImage(MultipartFile file, String name) throws IOException {
-	        
+	 public String saveImage(MultipartFile file, String name) throws Exception {
+		 	FileValidator.validateFile(file);
 		 	Path uploadPath = Paths.get(System.getProperty("user.dir")+uploadDir);
-	        
+	        FileValidator.validateFile(file);
 	        if (!Files.exists(uploadPath)) {
 	            Files.createDirectories(uploadPath);
 	        }

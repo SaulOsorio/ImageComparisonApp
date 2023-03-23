@@ -1,6 +1,5 @@
 package com.imagecompare.app.controller;
 
-import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,9 +28,9 @@ public class UploadController {
             String compareImageUpload = uploadService.saveImage(compareImage, "compareImage");
             Names.setCompareImageName(compareImageUpload);
             return "{\"status\": \"Files uploaded successfully\"}";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "{\"status\":\"Error uploading files\"}";
+        } catch (Exception e) {
+        	e.printStackTrace();
+            return "{\"status\":\"Error uploading files: "+ e.getMessage() +"\"}"; 
         }
     }
 }
