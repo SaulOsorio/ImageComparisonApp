@@ -7,35 +7,32 @@ export const UploadImages = () => {
   const [imagesToCompare, setImagesToCompare] = useState([]);
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
+  const [data, setData] = useState(null);
 
   const handleImage1Change = (event) => {
     const maxAllowedSize = 10 * 1024 * 1024;
-    if (event.target.files[0].size < maxAllowedSize){
-        setFile1(event.target.files[0]);
-        setImages((images) => [
-          ...images,
-          URL.createObjectURL(event.target.files[0]),
-        ]);
+    if (event.target.files[0].size < maxAllowedSize) {
+      setFile1(event.target.files[0]);
+      setImages((images) => [
+        ...images,
+        URL.createObjectURL(event.target.files[0]),
+      ]);
+    } else {
+      alert("the size is bigger than 10 Mb");
     }
-    else{
-        alert("the size is bigger than 10 Mb");
-    }
-    
   };
 
   const handleImage2Change = (event) => {
     const maxAllowedSize = 10 * 1024 * 1024;
 
-    if (event.target.files[0].size < maxAllowedSize){
-        
-        setFile2(event.target.files[0]);
-        setImagesToCompare((imagesToCompare) => [
-          ...imagesToCompare,
-          URL.createObjectURL(event.target.files[0]),
-        ]);
-    }
-    else{
-        alert("the size is bigger than 10 Mb");
+    if (event.target.files[0].size < maxAllowedSize) {
+      setFile2(event.target.files[0]);
+      setImagesToCompare((imagesToCompare) => [
+        ...imagesToCompare,
+        URL.createObjectURL(event.target.files[0]),
+      ]);
+    } else {
+      alert("the size is bigger than 10 Mb");
     }
   };
 
@@ -44,20 +41,47 @@ export const UploadImages = () => {
     setImagesToCompare(imagesToCompare.filter((x) => x !== blob));
   };
 
-  const handleSubmit = (event) => {
-    console.log("Simon!!")
+  // const handleSubmit = (event) => {
+  //   console.log("Simon!!");
+  //   event.preventDefault();
+
+  //   const formData = new FormData();
+  //   formData.append("file1", file1);
+  //   formData.append("file2", file2);
+
+  //   fetch("http://localhost:8080/upload", {
+  //     //mode: "no-cors",
+  //     method: "POST",
+  //     body: formData,
+  //   })
+
+  //   .then(response => response.json())
+  //   .then(setData(response.json()))
+  //   .catch(error => console.error(error));
+  
+  // };
+
+
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData();
     formData.append("file1", file1);
     formData.append("file2", file2);
 
-    fetch("http://localhost:8080/upload", {
-      mode: "no-cors",
+    try {
+      const response = await fetch('http://localhost:8080/upload', {
       method: "POST",
       body: formData,
     });
-  };
+      const data = await response.json();
+      setData(data.status)
+      //console.log(data.status); // the response data
+    } catch (error) {
+      //console.error(error); // handle errors
+    }
+  }
+  
 
   return (
     <form onSubmit={handleSubmit}>
@@ -93,9 +117,19 @@ export const UploadImages = () => {
           ))}
         </div>
       </div>
-      <div className="center">
-        <button type="submit">Upload Images</button>
+      <div className="container">
+        <div className="row">
+          <div className="col text-center">
+            <button type="submit" className="btn btn-secondary">
+              Upload Images
+            </button>
+          <div>
+            <h1>{data}</h1>
+            </div>
+          </div>
+        </div>
       </div>
+      {/* <div className="center  "></div> */}
     </form>
   );
 };
