@@ -41,27 +41,6 @@ export const UploadImages = () => {
     setImagesToCompare(imagesToCompare.filter((x) => x !== blob));
   };
 
-  // const handleSubmit = (event) => {
-  //   console.log("Simon!!");
-  //   event.preventDefault();
-
-  //   const formData = new FormData();
-  //   formData.append("file1", file1);
-  //   formData.append("file2", file2);
-
-  //   fetch("http://localhost:8080/upload", {
-  //     //mode: "no-cors",
-  //     method: "POST",
-  //     body: formData,
-  //   })
-
-  //   .then(response => response.json())
-  //   .then(setData(response.json()))
-  //   .catch(error => console.error(error));
-  
-  // };
-
-
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -76,7 +55,6 @@ export const UploadImages = () => {
     });
       const data = await response.json();
       setData(data.status)
-      //console.log(data.status); // the response data
     } catch (error) {
       //console.error(error); // handle errors
     }
