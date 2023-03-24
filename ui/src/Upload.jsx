@@ -10,19 +10,23 @@ export const UploadImages = () => {
   const [data, setData] = useState(null);
 
   const handleImage1Change = (event) => {
+    if (event.target.files[0] !== undefined){
       setFile1(event.target.files[0]);
       setImages((images) => [
-        images[0], //...images,
-        URL.createObjectURL(event.target.files[0]),
-      ]);
+      images[0], //...images,
+      URL.createObjectURL(event.target.files[0]),
+      ])
+    };
   };
 
   const handleImage2Change = (event) => {
+    if (event.target.files[0] !== undefined){
       setFile2(event.target.files[0]);
       setImagesToCompare((imagesToCompare) => [
-        imagesToCompare[0], //...imagesToCompare,
-        URL.createObjectURL(event.target.files[0]),
-      ]);
+      imagesToCompare[0], //...imagesToCompare,
+      URL.createObjectURL(event.target.files[0]),
+      ])
+    };
   };
 
   async function handleSubmit(event) {
