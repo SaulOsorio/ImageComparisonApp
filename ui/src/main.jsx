@@ -8,10 +8,11 @@ import { CompareBttn } from './Compare';
 
 ReactDOM.createRoot( document.getElementById('root')).render(
     <React.StrictMode>
+
         <TitleSection title="Image Comparison" subtitle="WebApp"/>
-        
+        <br/>
         <UploadImages/>
-        
+        <br/>
         <CompareBttn/>
     </React.StrictMode>
 );

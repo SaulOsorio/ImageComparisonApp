@@ -64,8 +64,9 @@ export const UploadImages = () => {
           </div>
         </div>
         <div className="row">
+        
           <div className="col">
-            
+          <br/>
             <FileInput
               id="image1"
               name="image1"
@@ -75,6 +76,7 @@ export const UploadImages = () => {
           </div>
 
           <div className="col">
+          <br/>
             <FileInput
               id="image2"
               name="image2"
