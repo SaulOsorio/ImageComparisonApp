@@ -38,7 +38,10 @@ export const UploadImages = () => {
         body: formData,
       });
       const data = await response.json();
-      setData(data.status);
+        setTimeout(() => {
+        setData(data.status);
+      }, 500);
+      setData("Uploading...");
     } catch (error) {
       //console.error(error); // handle errors
     }
