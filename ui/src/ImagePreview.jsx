@@ -2,9 +2,8 @@ import React from "react";
 
 export const ImagePreview = ({ image }) => {
   return (
-    <div>
-      <img src={image} alt={image} />
+      <img src={image} alt={image} className="img-normalizada"/>
       
-    </div>
+    
   );
 };
