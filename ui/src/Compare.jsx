@@ -21,7 +21,7 @@ export const CompareBttn = () =>{
     return(
         <>
         <div className='center'>
-            <button onClick={handleCompare}>Compare</button>
+            <button className="btn btn-secondary" onClick={handleCompare}>Compare</button>
         </div>   
         <div className='center'>
             <h1>{data}</h1>
