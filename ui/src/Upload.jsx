@@ -10,35 +10,19 @@ export const UploadImages = () => {
   const [data, setData] = useState(null);
 
   const handleImage1Change = (event) => {
-    const maxAllowedSize = 10 * 1024 * 1024;
-    if (event.target.files[0].size < maxAllowedSize) {
       setFile1(event.target.files[0]);
       setImages((images) => [
         images[0], //...images,
         URL.createObjectURL(event.target.files[0]),
       ]);
-    } else {
-      alert("the size is bigger than 10 Mb");
-    }
   };
 
   const handleImage2Change = (event) => {
-    const maxAllowedSize = 10 * 1024 * 1024;
-
-    if (event.target.files[0].size < maxAllowedSize) {
       setFile2(event.target.files[0]);
       setImagesToCompare((imagesToCompare) => [
         imagesToCompare[0], //...imagesToCompare,
         URL.createObjectURL(event.target.files[0]),
       ]);
-    } else {
-      alert("The file size can not be bigger than 10MB");
-    }
-  };
-
-  const deleteImage = (blob) => {
-    setImages(images.filter((x) => x !== blob));
-    setImagesToCompare(imagesToCompare.filter((x) => x !== blob));
   };
 
   async function handleSubmit(event) {
