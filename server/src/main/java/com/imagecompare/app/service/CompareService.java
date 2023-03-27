@@ -39,7 +39,7 @@ public class CompareService {
         int nonZeroPixels = Core.countNonZero(diff);
 
  
-        if (nonZeroPixels < 0.037899*img2.size().area()) {
+        if (nonZeroPixels < 0.094256*img2.size().area()) {
             return "{\"result\": \"Both images are the same!\"}";
         } else {
             return "{\"result\": \"Images are different\"}";
