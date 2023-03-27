@@ -23,8 +23,6 @@ public class CompareController {
 		baseImageName = Names.getBaseImageName();
 		compareImageName = Names.getCompareImageName();
 		try {
-			System.out.println(baseImageName);
-			System.out.println(compareImageName);
 			return new ResponseEntity<String>(this.compareService.compareImage(baseImageName,compareImageName),HttpStatus.OK);
 		}catch(Exception e){
 			return new ResponseEntity<String>("Could not compare: " + e.getMessage(), HttpStatus.BAD_REQUEST);
