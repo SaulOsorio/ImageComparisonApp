@@ -13,7 +13,6 @@ ReactDOM.createRoot( document.getElementById('root')).render(
         <br/>
         <UploadImages/>
         <br/>
-        <CompareBttn/>
     </React.StrictMode>
 );
 
