@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CompareBttn } from "./Compare";
 import { FileInput } from "./FileInput";
 import { ImagePreview } from "./ImagePreview";
@@ -16,7 +16,7 @@ export const UploadImages = () => {
     if (event.target.files[0] !== undefined){
       setFile1(event.target.files[0]);
       setImages((images) => [
-      images[0], //...images,
+      images[0], 
       URL.createObjectURL(event.target.files[0]),
       ])
     };
@@ -26,7 +26,7 @@ export const UploadImages = () => {
     if (event.target.files[0] !== undefined){
       setFile2(event.target.files[0]);
       setImagesToCompare((imagesToCompare) => [
-      imagesToCompare[0], //...imagesToCompare,
+      imagesToCompare[0], 
       URL.createObjectURL(event.target.files[0]),
       ])
     };
@@ -50,7 +50,7 @@ export const UploadImages = () => {
       }, 500);
       setData("Uploading...");
     } catch (error) {
-      //console.error(error); // handle errors
+      console.warn(error);
     }
   }
 
@@ -97,7 +97,7 @@ export const UploadImages = () => {
         <div className="row">
           <div className="center">
             
-            <button type="submit" className="btn btn-secondary">
+            <button type="submit" className="btn btn-secondary" disabled={file1 !== null &&  file2 !== null ? false : true}>
               Upload Images
             </button>
           
