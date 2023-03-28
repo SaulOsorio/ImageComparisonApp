@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { CompareBttn } from "./Compare";
 import { FileInput } from "./FileInput";
 import { ImagePreview } from "./ImagePreview";
+
+export const DataContext = React.createContext();
 
 export const UploadImages = () => {
   const [images, setImages] = useState([]);
@@ -52,6 +55,7 @@ export const UploadImages = () => {
   }
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <div className="container text-center">
         <div className="row">
@@ -104,10 +108,11 @@ export const UploadImages = () => {
               <h1>{data}</h1>
             </div>
         </div>
-
-
-        
       </div>
     </form>
+    <DataContext.Provider value={data}>
+      <CompareBttn />
+    </DataContext.Provider>
+    </>
   );
 };

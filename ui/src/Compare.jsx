@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useContext } from 'react';
+import { DataContext } from './Upload';
 import './style.css'
 
 export const CompareBttn = () =>{
     const [data, setData] = useState(null);
-
+    const status = useContext(DataContext);
     
     async function handleCompare() {
         try {
@@ -16,15 +16,15 @@ export const CompareBttn = () =>{
           }, 500);
           setData("Comparing")
         } catch (error) {
-          //console.error(error); // handle errors
+          console.warn(error);
         }
       }
-      
 
     return(
         <>
         <div className='center'>
-            <button className="btn btn-secondary" onClick={handleCompare}>Compare</button>
+            <button className="btn btn-secondary" onClick={handleCompare}
+            disabled={status !== "Files uploaded successfully" ? true : false}>Compare</button>
         </div>   
         <div className='center'>
             <h1>{data}</h1>
