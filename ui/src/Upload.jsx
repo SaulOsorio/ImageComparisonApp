@@ -13,23 +13,23 @@ export const UploadImages = () => {
   const [data, setData] = useState(null);
 
   const handleImage1Change = (event) => {
-    if (event.target.files[0] !== undefined){
+    if (event.target.files[0] !== undefined) {
       setFile1(event.target.files[0]);
       setImages((images) => [
-      images[0], 
-      URL.createObjectURL(event.target.files[0]),
-      ])
-    };
+        images[0],
+        URL.createObjectURL(event.target.files[0]),
+      ]);
+    }
   };
 
   const handleImage2Change = (event) => {
-    if (event.target.files[0] !== undefined){
+    if (event.target.files[0] !== undefined) {
       setFile2(event.target.files[0]);
       setImagesToCompare((imagesToCompare) => [
-      imagesToCompare[0], 
-      URL.createObjectURL(event.target.files[0]),
-      ])
-    };
+        imagesToCompare[0],
+        URL.createObjectURL(event.target.files[0]),
+      ]);
+    }
   };
 
   async function handleSubmit(event) {
@@ -45,7 +45,7 @@ export const UploadImages = () => {
         body: formData,
       });
       const data = await response.json();
-        setTimeout(() => {
+      setTimeout(() => {
         setData(data.status);
       }, 500);
       setData("Uploading...");
@@ -56,63 +56,68 @@ export const UploadImages = () => {
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <div className="container text-center">
-        <div className="row">
-          <div className="col">
-            {
-              <ImagePreview image={images[1]} />
-            }
-          </div>
-
-          <div className="col">
-            { 
-              <ImagePreview image={imagesToCompare[1]} />
-            }
-          </div>
-        </div>
-        <div className="row">
-        
-          <div className="col">
-          <br/>
-            <FileInput
-              id="image1"
-              name="image1"
-              accept="image/*"
-              onChange={handleImage1Change}
-            />
-          </div>
-
-          <div className="col">
-          <br/>
-            <FileInput
-              id="image2"
-              name="image2"
-              accept="image/*"
-              onChange={handleImage2Change}
-            />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="center">
-            
-            <button type="submit" className="btn btn-secondary" disabled={file1 !== null &&  file2 !== null ? false : true}>
-              Upload Images
-            </button>
-          
-          </div>
-        </div>
-        <div className="row">
-            <div className="center">
-              <h1>{data}</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="container text-center">
+          <div className="row">
+            <div className="col">
+              BASE IMAGE
             </div>
+            <div className="col">
+              IMAGE TO COMPARE
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">{<ImagePreview image={images[1]} />}</div>
+
+            <div className="col">
+              {<ImagePreview image={imagesToCompare[1]} />}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <br />
+              <FileInput
+                id="image1"
+                name="image1"
+                accept="image/*"
+                onChange={handleImage1Change}
+              />
+            </div>
+
+            <div className="col">
+              <br />
+              <FileInput
+                id="image2"
+                name="image2"
+                accept="image/*"
+                onChange={handleImage2Change}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="center">
+              <button
+                type="submit"
+                className="btn btn-secondary"
+                disabled={file1 !== null && file2 !== null ? false : true}
+              >
+                Upload Images
+              </button>
+            </div>
+          </div>
+          <div className="row">
+            <div className="center">
+              <div className="alert alert-secondary" role="alert">
+                {data}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
-    <DataContext.Provider value={data}>
-      <CompareBttn />
-    </DataContext.Provider>
+      </form>
+      <DataContext.Provider value={data}>
+        <CompareBttn />
+      </DataContext.Provider>
     </>
   );
 };

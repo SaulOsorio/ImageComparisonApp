@@ -11,6 +11,9 @@ ReactDOM.createRoot( document.getElementById('root')).render(
 
         <TitleSection title="Image Comparison" subtitle="WebApp"/>
         <br/>
+        <br/>
+        <br/>
+        <br/>
         <UploadImages/>
         <br/>
     </React.StrictMode>
