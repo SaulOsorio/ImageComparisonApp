@@ -4,6 +4,8 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ public class CompareService {
 	 */
 	 @Value("${upload.dir}")
 	 private String uploadDir;
+	 
+	 private static final Logger logger = LoggerFactory.getLogger(CompareService.class);
 	 
 	 public String compareImage(String baseImageName, String compareImageName) {
 		
@@ -37,12 +41,16 @@ public class CompareService {
 
         // Count the number of non-zero pixels (pixels that are different)
         int nonZeroPixels = Core.countNonZero(diff);
-
+        
  
         if (nonZeroPixels < 0.094256*img2.size().area()) {
+        	logger.info("Comparison of images: " +baseImageName+" and "+compareImageName+" done successfully");
             return "{\"result\": \"Both images are the same!\"}";
         } else {
+        	logger.info("Comparison of images: " +baseImageName+" and "+compareImageName+" done successfully");
             return "{\"result\": \"Images are different\"}";
         }
+        
+        
 }
 }
