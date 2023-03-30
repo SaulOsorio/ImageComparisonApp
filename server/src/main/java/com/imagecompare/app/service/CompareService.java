@@ -28,7 +28,7 @@ public class CompareService {
 		
 		Mat img1 = Imgcodecs.imread(System.getProperty("user.dir")+uploadDir+baseImageName);
         Mat img2 = Imgcodecs.imread(System.getProperty("user.dir")+uploadDir+compareImageName);
-
+        
         // Resize the images to the same size (optional)
         Imgproc.resize(img1, img1, img2.size());
         
@@ -40,15 +40,16 @@ public class CompareService {
         Imgproc.cvtColor(diff, diff, Imgproc.COLOR_BGR2GRAY);
 
         // Count the number of non-zero pixels (pixels that are different)
-        int nonZeroPixels = Core.countNonZero(diff);
         
- 
-        if (nonZeroPixels < 0.094256*img2.size().area()) {
+        Imgproc.threshold(diff, diff, 30, 255, Imgproc.THRESH_BINARY);
+        int nonZeroPixels = Core.countNonZero(diff);
+        double coincidencePercentage=Math.floor((1-nonZeroPixels/img2.size().area())*100*100)/100;
+        if (nonZeroPixels == 0) {
         	logger.info("Comparison of images: " +baseImageName+" and "+compareImageName+" done successfully");
-            return "{\"result\": \"Both images are the same!\"}";
+            return "{\"result\": \"With a coincidence of "+coincidencePercentage+"%"+" It seems that both images are the same!\"}";
         } else {
         	logger.info("Comparison of images: " +baseImageName+" and "+compareImageName+" done successfully");
-            return "{\"result\": \"Images are different\"}";
+        	return "{\"result\": \"With a difference of "+Math.floor((100-coincidencePercentage)*1000)/1000+"%"+" It seems that images are not the same\"}";
         }
         
         
