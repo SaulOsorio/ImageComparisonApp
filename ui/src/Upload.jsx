@@ -42,6 +42,10 @@ export const UploadImages = () => {
     }
   };
 
+  useEffect(() => {
+    setData("")
+  }, [images, imagesToCompare])
+
   return (
     <>
       <form onSubmit={handleSubmit}>
