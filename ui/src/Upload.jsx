@@ -34,8 +34,9 @@ export const UploadImages = () => {
         body: formData,
       });
       const data = await response.json();
-      setTimeout(()=>{
-      setData(data.status)}, 500);
+      setTimeout(() => {
+        setData(data.status);
+      }, 500);
       setData("Uploading");
     } catch (error) {
       console.warn(error);
@@ -43,8 +44,8 @@ export const UploadImages = () => {
   };
 
   useEffect(() => {
-    setData("")
-  }, [images, imagesToCompare])
+    setData("");
+  }, [images, imagesToCompare]);
 
   return (
     <>
@@ -97,12 +98,18 @@ export const UploadImages = () => {
               </button>
             </div>
           </div>
-          
+
           <div className="row">
             <div className="center">
-              <div className="alert alert-secondary" role="alert">
-                <h1>{data}</h1>
-              </div>
+              {data !== "" ? (
+                <div className="alert alert-secondary" role="alert">
+                  <h4>{data}</h4>
+                </div>
+              ) : (
+                <div>
+                  <br />
+                </div>
+              )}
             </div>
           </div>
         </div>
