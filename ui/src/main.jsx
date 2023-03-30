@@ -1,9 +1,8 @@
-import './style.css';
+import './css/style.css';
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import { TitleSection } from './Titles';
-import { UploadImages } from './Upload';
-import { CompareBttn } from './Compare';
+import { TitleSection } from './components/Titles';
+import { UploadImages } from './components/Upload';
 
 
 ReactDOM.createRoot( document.getElementById('root')).render(
