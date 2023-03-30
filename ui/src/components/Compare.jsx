@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { DataContext } from "./Upload";
-import "./style.css";
+import "../css/style.css";
 
 export const CompareBttn = () => {
   const [data, setData] = useState(null);

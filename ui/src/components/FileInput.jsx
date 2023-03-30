@@ -1,5 +1,5 @@
 import React from "react";
-import './style.css';
+import '../css/style.css';
 
 export const FileInput = ({ id, name, accept, onChange }) => {
   return (
