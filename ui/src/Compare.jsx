@@ -39,9 +39,14 @@ export const CompareBttn = () => {
       </div>
 
       <div className="center">
-        <div className="alert alert-secondary" role="alert">
-          {data}
-        </div>
+
+        {data !== ""? (<div className="alert alert-secondary" role="alert">
+          <h2>{data}</h2>
+        </div>):(
+          <div>
+                  <br />
+                </div>
+        )}
       </div>
     </>
   );
