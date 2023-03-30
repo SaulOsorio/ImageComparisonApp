@@ -11,60 +11,44 @@ export const UploadImages = () => {
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
   const [data, setData] = useState(null);
+  const isUploadable = file1 !== null && file2 !== null;
 
-  const handleImage1Change = (event) => {
-    if (event.target.files[0] !== undefined) {
-      setFile1(event.target.files[0]);
-      setImages((images) => [
+  const handleImageChange = (event, setFile, setImagesArr) => {
+    if (event.target.files[0]) {
+      setFile(event.target.files[0]);
+      setImagesArr((images) => [
         images[0],
         URL.createObjectURL(event.target.files[0]),
       ]);
     }
   };
 
-  const handleImage2Change = (event) => {
-    if (event.target.files[0] !== undefined) {
-      setFile2(event.target.files[0]);
-      setImagesToCompare((imagesToCompare) => [
-        imagesToCompare[0],
-        URL.createObjectURL(event.target.files[0]),
-      ]);
-    }
-  };
-
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append("file1", file1);
     formData.append("file2", file2);
-
     try {
       const response = await fetch("http://localhost:8080/upload", {
         method: "POST",
         body: formData,
       });
       const data = await response.json();
-      setTimeout(() => {
-        setData(data.status);
-      }, 500);
-      setData("Uploading...");
+      setTimeout(()=>{
+      setData(data.status)}, 500);
+      setData("Uploading");
     } catch (error) {
       console.warn(error);
     }
-  }
+  };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div className="container text-center">
           <div className="row">
-            <div className="col">
-              BASE IMAGE
-            </div>
-            <div className="col">
-              IMAGE TO COMPARE
-            </div>
+            <div className="col">BASE IMAGE</div>
+            <div className="col">IMAGE TO COMPARE</div>
           </div>
           <div className="row">
             <div className="col">{<ImagePreview image={images[1]} />}</div>
@@ -80,7 +64,9 @@ export const UploadImages = () => {
                 id="image1"
                 name="image1"
                 accept="image/*"
-                onChange={handleImage1Change}
+                onChange={(event) =>
+                  handleImageChange(event, setFile1, setImages)
+                }
               />
             </div>
 
@@ -90,26 +76,28 @@ export const UploadImages = () => {
                 id="image2"
                 name="image2"
                 accept="image/*"
-                onChange={handleImage2Change}
+                onChange={(event) =>
+                  handleImageChange(event, setFile2, setImagesToCompare)
+                }
               />
             </div>
           </div>
-
           <div className="row">
             <div className="center">
               <button
                 type="submit"
                 className="btn btn-secondary"
-                disabled={file1 !== null && file2 !== null ? false : true}
+                disabled={!isUploadable}
               >
                 Upload Images
               </button>
             </div>
           </div>
+          
           <div className="row">
             <div className="center">
               <div className="alert alert-secondary" role="alert">
-                {data}
+                <h1>{data}</h1>
               </div>
             </div>
           </div>
