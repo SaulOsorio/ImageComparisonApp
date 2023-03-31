@@ -16,9 +16,10 @@ public class CompareController {
 	private String compareImageName;
 	
 	
-	@CrossOrigin(origins = "http://localhost:5173")
+	
 	@GetMapping("/compare")
 	@RateLimited
+	@CrossOrigin(origins = "http://localhost:5173")
 	public String getComparisonResult(){
 		baseImageName = Names.getBaseImageName();
 		compareImageName = Names.getCompareImageName();
@@ -26,6 +27,7 @@ public class CompareController {
 			return this.compareService.compareImage(baseImageName,compareImageName);
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			return "{\"status\":\"Could not compare: "+ e.getMessage() +"\"}";
 		}
 	}
