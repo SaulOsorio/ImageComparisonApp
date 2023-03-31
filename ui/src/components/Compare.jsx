@@ -12,7 +12,11 @@ export const CompareBttn = () => {
       const data = await response.json();
 
       setTimeout(() => {
-        setData(data.result);
+        if (data.hasOwnProperty("result")){
+          setData(data.result);
+        } else {
+          setData(data.status)
+        }
       }, 500);
       setData("Comparing");
     } catch (error) {
