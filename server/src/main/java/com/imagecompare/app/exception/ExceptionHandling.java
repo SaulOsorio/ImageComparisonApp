@@ -10,6 +10,6 @@ public class ExceptionHandling {
 	
 	@ExceptionHandler(TooManyRequestsException.class)
 	public ResponseEntity<String> handleTooManyRequestsException(TooManyRequestsException e){
-		return new ResponseEntity<String>("{\"status\":\"Could not compare: "+ e.getMessage() +"\"}", HttpStatus.TOO_MANY_REQUESTS);
+		return new ResponseEntity<String>("{\"status\":\""+ e.getMessage() +"\"}", HttpStatus.TOO_MANY_REQUESTS);
 	}
 }
