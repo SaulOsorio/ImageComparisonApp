@@ -17,6 +17,7 @@ public class CompareController {
 	private String baseImageName;
 	private String compareImageName;
 	
+	@RateLimited
 	@CrossOrigin(origins = "http://localhost:5173")
 	@GetMapping("/compare")
 	public ResponseEntity<String> getComparisonResult(){
@@ -24,8 +25,9 @@ public class CompareController {
 		compareImageName = Names.getCompareImageName();
 		try {
 			return new ResponseEntity<String>(this.compareService.compareImage(baseImageName,compareImageName),HttpStatus.OK);
-		}catch(Exception e){
-			return new ResponseEntity<String>("Could not compare: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		catch(Exception e){
+			return new ResponseEntity<String>("{\"status\":\"Could not compare: "+ e.getMessage() +"\"}", HttpStatus.BAD_REQUEST);
 		}
 	}
 }

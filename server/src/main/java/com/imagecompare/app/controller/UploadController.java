@@ -19,6 +19,7 @@ public class UploadController {
     private UploadService uploadService;
 	
 	@PostMapping("/upload")
+	@RateLimited
 	@CrossOrigin(origins = "http://localhost:5173")
     public String uploadImages(@RequestParam("file1") MultipartFile baseImage,
                                @RequestParam("file2") MultipartFile compareImage) {
